@@ -6,6 +6,15 @@ fall into these categories:
 2. Grammar issues that affect meaning or professionalism (skip pure punctuation).
 3. Exaggerated or overconfident marketing language (e.g. "revolutionary", "miracle", unqualified
    superlatives, absolute claims without evidence).
+   - Always flag promotional clinical claims that use extreme efficacy/safety framing, even if
+     the underlying fact would also need external verification. Examples include very large
+     mortality reductions over very short windows, "completely eliminated" events, "all age
+     groups", "near-immediate" symptom resolution, "zero severe adverse events", broad
+     first-line positioning, or "superior efficacy" without balanced context. These are
+     adherence risks in the wording itself.
+   - If the document says the claims are synthetic, simulated, or for promotional simulation,
+     still flag the claims as review findings. The disclaimer does not make the promotional
+     claims acceptable in reviewed content.
 4. Image/figure inconsistencies, based on the `[Figure: ...]` prose descriptions in the markdown:
    - Before/after pairs whose subjects appear to be different people (different apparent age,
      skin tone, gender, distinguishing features)

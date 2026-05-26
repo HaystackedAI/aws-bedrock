@@ -1,4 +1,6 @@
 .env
+.env.local
+.env.*.local
 .aws-sam
 build.toml
 model.tar.gz

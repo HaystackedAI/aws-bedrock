@@ -67,5 +67,9 @@ class ReviewS3UploadHook(HookProvider):
             )
             with self._lock:
                 self._last_review_url = url
+            print(
+                "[MCR Review] Uploaded review results "
+                f"s3://{STAGING_BUCKET}/{s3_key}"
+            )
         except Exception as e:
             print(f"[HOOK ERROR] Failed to upload review results: {e}")

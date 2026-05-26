@@ -224,6 +224,21 @@ async def agent_stream(payload, context: RequestContext):
         }
         return
 
+    print(
+        "[MCR Review] AgentCore request received "
+        + json.dumps(
+            {
+                "session_id": session_id,
+                "enabled_sources": enabled_sources,
+                "content_pdf_uri": content_pdf_uri,
+                "content_pdf_name": content_pdf_name,
+                "reference_count": len(reference_uris),
+                "reference_names": reference_names,
+            },
+            default=str,
+        )
+    )
+
     full_prompt = (
         user_query
         + "\n\n"
@@ -267,6 +282,17 @@ async def agent_stream(payload, context: RequestContext):
                 continue
             if "current_tool_use" in d:
                 ctu = d["current_tool_use"]
+                print(
+                    "[MCR Review] Tool event "
+                    + json.dumps(
+                        {
+                            "session_id": session_id,
+                            "toolUseId": ctu.get("toolUseId"),
+                            "name": ctu.get("name"),
+                        },
+                        default=str,
+                    )
+                )
                 d["current_tool_use"] = {
                     "toolUseId": ctu.get("toolUseId"),
                     "name": ctu.get("name"),

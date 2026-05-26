@@ -44,6 +44,16 @@ def create_upload_url():
     ext = req.filename.rsplit(".", 1)[-1] if "." in req.filename else "pdf"
     key = f"uploads/{uuid.uuid4().hex}.{ext}"
 
+    logger.info(
+        "Creating pre-signed upload URL",
+        extra={
+            "bucket": BUCKET_NAME,
+            "key": key,
+            "filename": req.filename,
+            "content_type": req.content_type,
+        },
+    )
+
     url = s3_client.generate_presigned_url(
         "put_object",
         Params={"Bucket": BUCKET_NAME, "Key": key, "ContentType": req.content_type},

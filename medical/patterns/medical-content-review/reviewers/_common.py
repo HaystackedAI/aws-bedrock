@@ -123,7 +123,13 @@ def run_inner_agent(
     try:
         data = json.loads(payload)
     except json.JSONDecodeError:
-        return []
+        array_match = re.search(r"\[[\s\S]*\]", payload)
+        if not array_match:
+            return []
+        try:
+            data = json.loads(array_match.group(0))
+        except json.JSONDecodeError:
+            return []
     if not isinstance(data, list):
         return []
     return [x for x in data if isinstance(x, dict)]
