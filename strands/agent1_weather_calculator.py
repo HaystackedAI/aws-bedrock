@@ -1,3 +1,5 @@
+import asyncio
+
 from strands import Agent, tool
 from strands.models import BedrockModel
 from strands_tools import calculator
@@ -22,5 +24,19 @@ agent = Agent(
     system_prompt="You're a helpful assistant. You can perform simple math and tell the weather."
 )
 
-response = agent("What is the weather today?")
-print(response)
+# response1 = agent("What is the weather today?")
+# response2 = agent("how much is 2 + 2?")
+# print(response1)
+# print(response2)
+
+
+async def main():
+    stream = agent.stream_async(
+        "What is 2 + 2 and what's the weather?"
+    )
+
+    async for event in stream:
+        print(event)
+
+
+asyncio.run(main())
